@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>zhengchu-fenkuai</title>
+      <link href="/2022/07/15/%E7%AC%94%E8%AE%B0/zhengchu-fenkuai/"/>
+      <url>/2022/07/15/%E7%AC%94%E8%AE%B0/zhengchu-fenkuai/</url>
+      
+        <content type="html"><![CDATA[<p><a href="">阅读效果更佳</a></p><h3 id="什么是整除分块"><a href="#什么是整除分块" class="headerlink" title="什么是整除分块"></a>什么是整除分块</h3><p>通俗的讲，是一种能用 $O(\sqrt{n})$ 的时间复杂度解决一些含有 $\left \lfloor \frac{n}{i} \right \rfloor $ 的式子（下取整）</p> <span id="more"></span><h3 id="整除分块的原理"><a href="#整除分块的原理" class="headerlink" title="整除分块的原理"></a>整除分块的原理</h3><p>如图，当 $x &gt;4$时，我们发现它是连续的，于是我们可以尝试找出块长的规律，即可连续计算。<br><img src="https://cdn.luogu.com.cn/upload/image_hosting/ep5xl3af.png" alt=""></p><p>至于规律嘛：（摘自<a href="https://oiwiki.org/">这里</a>）</p><p>数论分块结论</p><p>对于常数 $n$ ，使得式子 $ \frac{n}{i}=\frac{n}{j}$</p><p>成立的最大的满足 $i\leq j \leq n $ 的 $j$ 的值为$\left \lfloor \frac{n}{\left \lfloor \frac{n}{i} \right \rfloor } \right \rfloor $。即值  所在的块的右端点为 $\left \lfloor \frac{n}{\left \lfloor \frac{n}{i} \right \rfloor } \right \rfloor $</p><p><del>我也不知道为什么这是怎么搞出来的，人类智慧是无穷的</del></p><p>代码大概是这样：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while(l&lt;=n)&#123;</span><br><span class="line">r=n/(n/l);</span><br><span class="line">ans+=(n/l)*(r-l+1)</span><br><span class="line">l=r+1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="UVA11526"><a href="#UVA11526" class="headerlink" title="UVA11526"></a><a href="https://www.luogu.com.cn/problem/UVA11526">UVA11526</a></h4><p>板子。</p><h4 id="P2261"><a href="#P2261" class="headerlink" title="P2261"></a><a href="https://www.luogu.com.cn/problem/P2261">P2261</a></h4><script type="math/tex; mode=display">\sum_{i=1}^{n} k \bmod{i} = \sum_{i=1}^{n} k-\left \lfloor \frac{k}{i} \right \rfloor \times i</script><p>结束。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>公告</title>
       <link href="/2022/07/03/text/gonggao/"/>
       <url>/2022/07/03/text/gonggao/</url>
@@ -167,6 +186,25 @@
         <tags>
             
             <tag> 题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>寒假计划</title>
+      <link href="/2022/01/23/%E7%AC%94%E8%AE%B0/plan%20to%20the%20summer/"/>
+      <url>/2022/01/23/%E7%AC%94%E8%AE%B0/plan%20to%20the%20summer/</url>
+      
+        <content type="html"><![CDATA[<h2 id="开坑"><a href="#开坑" class="headerlink" title="开坑"></a>开坑</h2> <span id="more"></span>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 随感 </tag>
             
         </tags>
       

@@ -20,20 +20,22 @@
     var CONFIG = {"hostname":"hereiszd.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":-1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="题意简述已经够简了。">
+  <meta name="description" content="阅读效果更佳 什么是整除分块通俗的讲，是一种能用 $O(\sqrt{n})$ 的时间复杂度解决一些含有 $\left \lfloor \frac{n}{i} \right \rfloor $ 的式子（下取整）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="P8071 题解">
-<meta property="og:url" content="https://hereiszd.github.io/2022/01/24/%E9%A2%98%E8%A7%A3/P8071-%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:title" content="zhengchu-fenkuai">
+<meta property="og:url" content="https://hereiszd.github.io/2022/07/15/%E7%AC%94%E8%AE%B0/zhengchu-fenkuai/index.html">
 <meta property="og:site_name" content="zd的小窝">
-<meta property="og:description" content="题意简述已经够简了。">
+<meta property="og:description" content="阅读效果更佳 什么是整除分块通俗的讲，是一种能用 $O(\sqrt{n})$ 的时间复杂度解决一些含有 $\left \lfloor \frac{n}{i} \right \rfloor $ 的式子（下取整）">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-24T11:00:48.000Z">
-<meta property="article:modified_time" content="2022-02-28T13:33:44.743Z">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/ep5xl3af.png">
+<meta property="article:published_time" content="2022-07-15T13:28:00.000Z">
+<meta property="article:modified_time" content="2022-07-15T13:29:04.018Z">
 <meta property="article:author" content="zd">
-<meta property="article:tag" content="题解">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/ep5xl3af.png">
 
-<link rel="canonical" href="https://hereiszd.github.io/2022/01/24/%E9%A2%98%E8%A7%A3/P8071-%E9%A2%98%E8%A7%A3/">
+<link rel="canonical" href="https://hereiszd.github.io/2022/07/15/%E7%AC%94%E8%AE%B0/zhengchu-fenkuai/">
 
 
 <script id="page-configurations">
@@ -59,7 +61,7 @@
   padding: 1px 4px;
 }
 </style>
-  <title>P8071 题解 | zd的小窝</title>
+  <title>zhengchu-fenkuai | zd的小窝</title>
   
 
 
@@ -197,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://hereiszd.github.io/2022/01/24/%E9%A2%98%E8%A7%A3/P8071-%E9%A2%98%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://hereiszd.github.io/2022/07/15/%E7%AC%94%E8%AE%B0/zhengchu-fenkuai/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/touxiang.jpg">
@@ -210,7 +212,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          P8071 题解
+          zhengchu-fenkuai
         </h1>
 
         <div class="post-meta">
@@ -221,16 +223,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-01-24 19:00:48" itemprop="dateCreated datePublished" datetime="2022-01-24T19:00:48+08:00">2022-01-24</time>
+              <time title="创建时间：2022-07-15 21:28:00 / 修改时间：21:29:04" itemprop="dateCreated datePublished" datetime="2022-07-15T21:28:00+08:00">2022-07-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-28 21:33:44" itemprop="dateModified" datetime="2022-02-28T21:33:44+08:00">2022-02-28</time>
-              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -250,13 +246,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h2><p><del>已经够简了</del>。</p>
+        <p><a href="">阅读效果更佳</a></p>
+<h3 id="什么是整除分块"><a href="#什么是整除分块" class="headerlink" title="什么是整除分块"></a>什么是整除分块</h3><p>通俗的讲，是一种能用 $O(\sqrt{n})$ 的时间复杂度解决一些含有 $\left \lfloor \frac{n}{i} \right \rfloor $ 的式子（下取整）</p>
  <span id="more"></span>
-<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>比较像<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1425">这个</a>题目。</p>
-<p>用一个同一个思想：全换成分钟数，避免分类讨论。</p>
-<p>可是样例也告诉我们了，可能倒回前一天，只需加个特判即可。</p>
-<p><del>虽然你不加这个特判也能 A，数据好水啊</del>。</p>
-<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> h,min;<span class="comment">//读入</span></span><br><span class="line">	cin&gt;&gt;h&gt;&gt;min;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	ans+=h*<span class="number">60</span>+min;<span class="comment">//转化同一进制</span></span><br><span class="line">	ans-=<span class="number">45</span>;</span><br><span class="line">	<span class="keyword">if</span>(ans&lt;<span class="number">0</span>)ans+=<span class="number">24</span>*<span class="number">60</span>;<span class="comment">//如果到了前一天，就变成前一天的最后</span></span><br><span class="line">	<span class="comment">//把单位换回来</span></span><br><span class="line">	<span class="keyword">int</span> nowh=ans/<span class="number">60</span>;<span class="comment">//现在的小时</span></span><br><span class="line">	<span class="keyword">int</span> nowm=ans%<span class="number">60</span>;<span class="comment">//现在的分钟</span></span><br><span class="line">	cout&lt;&lt;nowh&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;nowm;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="整除分块的原理"><a href="#整除分块的原理" class="headerlink" title="整除分块的原理"></a>整除分块的原理</h3><p>如图，当 $x &gt;4$时，我们发现它是连续的，于是我们可以尝试找出块长的规律，即可连续计算。<br><img src="https://cdn.luogu.com.cn/upload/image_hosting/ep5xl3af.png" alt=""></p>
+<p>至于规律嘛：（摘自<a target="_blank" rel="noopener" href="https://oiwiki.org/">这里</a>）</p>
+<p>数论分块结论</p>
+<p>对于常数 $n$ ，使得式子 $ \frac{n}{i}=\frac{n}{j}$</p>
+<p>成立的最大的满足 $i\leq j \leq n $ 的 $j$ 的值为$\left \lfloor \frac{n}{\left \lfloor \frac{n}{i} \right \rfloor } \right \rfloor $。即值  所在的块的右端点为 $\left \lfloor \frac{n}{\left \lfloor \frac{n}{i} \right \rfloor } \right \rfloor $</p>
+<p><del>我也不知道为什么这是怎么搞出来的，人类智慧是无穷的</del></p>
+<p>代码大概是这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">while(l&lt;=n)&#123;</span><br><span class="line">	r=n/(n/l);</span><br><span class="line">	ans+=(n/l)*(r-l+1)</span><br><span class="line">	l=r+1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="UVA11526"><a href="#UVA11526" class="headerlink" title="UVA11526"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/UVA11526">UVA11526</a></h4><p>板子。</p>
+<h4 id="P2261"><a href="#P2261" class="headerlink" title="P2261"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2261">P2261</a></h4><script type="math/tex; mode=display">\sum_{i=1}^{n} k \bmod{i} = \sum_{i=1}^{n} k-\left \lfloor \frac{k}{i} \right \rfloor \times i</script><p>结束。</p>
 
     </div>
 
@@ -272,7 +274,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
           </div>
 
         
@@ -281,13 +283,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/01/23/%E7%AC%94%E8%AE%B0/plan%20to%20the%20summer/" rel="prev" title="寒假计划">
-      <i class="fa fa-chevron-left"></i> 寒假计划
+    <a href="/2022/07/03/text/gonggao/" rel="prev" title="公告">
+      <i class="fa fa-chevron-left"></i> 公告
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/01/29/%E7%AC%94%E8%AE%B0/shortest-path-problem/" rel="next" title="最短路学习笔记">
-      最短路学习笔记 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -355,7 +354,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F%E7%AE%80%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题意简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">题目分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">2.1.</span> <span class="nav-text">Code</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B4%E9%99%A4%E5%88%86%E5%9D%97"><span class="nav-number">1.</span> <span class="nav-text">什么是整除分块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E9%99%A4%E5%88%86%E5%9D%97%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">整除分块的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#UVA11526"><span class="nav-number">3.1.</span> <span class="nav-text">UVA11526</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#P2261"><span class="nav-number">3.2.</span> <span class="nav-text">P2261</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
