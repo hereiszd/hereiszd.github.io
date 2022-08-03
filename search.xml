@@ -27,7 +27,7 @@
       <link href="/2022/07/16/%E7%AC%94%E8%AE%B0/cf-down-rating/"/>
       <url>/2022/07/16/%E7%AC%94%E8%AE%B0/cf-down-rating/</url>
       
-        <content type="html"><![CDATA[ <span id="more"></span><h2 id="CF807"><a href="#CF807" class="headerlink" title="CF807"></a>CF807</h2><p>还好还能把 A 秒了，但是交错题目就很尴尬。</p><p>B 应该早点想到前缀和， trick 很常见，但是每次应该把所有自己乱搞的样例都跑一遍，白交了一发。</p><p>C 不知道为什么挂了，思路应该没问题。</p><p><del>md 今天大概率掉分喽。</del></p>]]></content>
+        <content type="html"><![CDATA[ <span id="more"></span><h2 id="CF807"><a href="#CF807" class="headerlink" title="CF807"></a>CF807</h2><p>还好还能把 A 秒了，但是交错题目就很尴尬。</p><p>B 应该早点想到前缀和， trick 很常见，但是每次应该把所有自己乱搞的样例都跑一遍，白交了一发。</p><p>C 不知道为什么挂了，思路应该没问题。</p><p><del>md 今天大概率掉分喽。</del></p><p>rating: 1066-1067 （+1）</p><h2 id="CF810"><a href="#CF810" class="headerlink" title="CF810"></a>CF810</h2><p>只会 A，还白交了 2 发，掉大分。</p><p>rating: 1067-987 （-80）</p><h2 id="codeTON-R2"><a href="#codeTON-R2" class="headerlink" title="codeTON R2"></a>codeTON R2</h2><p>不会 A，跑路了，警钟敲烂。</p><h2 id="CF811"><a href="#CF811" class="headerlink" title="CF811"></a>CF811</h2><p>A交了 2 发，不知道为什么。</p><p>C居然过了。</p><p>E到了最后脑子糊了，明明很简单可以出的。</p><p><strong>B更是重量级，本来想先打暴力，然后过了，然后忘了，然后就没有然后了</strong></p><p><del>人生中第一次 fst 寄</del></p><p>987-957 （-30 <del>本来是 +30 的 ，寄</del>）</p>]]></content>
       
       
       
@@ -224,25 +224,6 @@
         <tags>
             
             <tag> 题解 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>寒假计划</title>
-      <link href="/2022/01/23/%E7%AC%94%E8%AE%B0/plan%20to%20the%20summer/"/>
-      <url>/2022/01/23/%E7%AC%94%E8%AE%B0/plan%20to%20the%20summer/</url>
-      
-        <content type="html"><![CDATA[<h2 id="开坑"><a href="#开坑" class="headerlink" title="开坑"></a>开坑</h2> <span id="more"></span>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 随感 </tag>
             
         </tags>
       
