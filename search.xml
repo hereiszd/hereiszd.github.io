@@ -4,6 +4,63 @@
   
     
     <entry>
+      <title>CF1354B题解</title>
+      <link href="/2022/11/28/%E9%A2%98%E8%A7%A3/CF1354B-sol/"/>
+      <url>/2022/11/28/%E9%A2%98%E8%A7%A3/CF1354B-sol/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><p>看着题解区内没有双指针的做法，这里向大家介绍一下本题双指针的做法。</p><h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>显然，若 $S$ 的一个字串 $T$ 满足题意，则所有包含 $T$ 的字符串均满足题意。</p><p>我们不妨从 $1$ 开始，维护两个指针 $l,r$，每次操作使 $r$ 向右尝试增加，判断新的字串是否满足题意，若是，则尝试将 $l$ 右移，尽量缩小字串。</p><p>因为首先是满足题意，其次再缩小长度，所以本题的正确性可以得到保证。</p><p>时间复杂度分析：因为每个点最多分别被 $l,r$ 扫到一次，所以时间复杂度为 $\Theta(n)$ 可以通过该题。</p><h2 id="code"><a href="#code" class="headerlink" title="$code$"></a>$code$</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Author:zd</span></span><br><span class="line"><span class="comment">Status:WA on pretest 2</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//去掉了快读，快写等函数。 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">2e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x7f7f7f7f</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;<span class="keyword">int</span> _;<span class="built_in">read</span>(_);<span class="keyword">while</span>(_--)<span class="built_in">solve</span>();<span class="keyword">return</span> <span class="number">0</span>;&#125;</span><br><span class="line"><span class="keyword">char</span> s[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>,s+<span class="number">1</span>);</span><br><span class="line"><span class="keyword">int</span> a=<span class="number">0</span>,b=<span class="number">0</span>,c=<span class="number">0</span>,l=<span class="number">0</span>,r=<span class="number">0</span>,n=<span class="built_in">strlen</span>(s+<span class="number">1</span>);<span class="comment">//a,b,c分别维护区间内1,2,3的个数 </span></span><br><span class="line"><span class="keyword">int</span> ans=INF;</span><br><span class="line"><span class="keyword">while</span>(r&lt;=n)&#123;</span><br><span class="line"><span class="keyword">if</span>(a&amp;&amp;b&amp;&amp;c)&#123;</span><br><span class="line"><span class="keyword">if</span>(s[l]==<span class="string">&#x27;1&#x27;</span>)a--;</span><br><span class="line"><span class="keyword">if</span>(s[l]==<span class="string">&#x27;2&#x27;</span>)b--;</span><br><span class="line"><span class="keyword">if</span>(s[l]==<span class="string">&#x27;3&#x27;</span>)c--;</span><br><span class="line">l++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">r++;</span><br><span class="line"><span class="keyword">if</span>(s[r]==<span class="string">&#x27;1&#x27;</span>)a++;</span><br><span class="line"><span class="keyword">if</span>(s[r]==<span class="string">&#x27;2&#x27;</span>)b++;</span><br><span class="line"><span class="keyword">if</span>(s[r]==<span class="string">&#x27;3&#x27;</span>)c++;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(a&amp;&amp;b&amp;&amp;c)<span class="built_in">cmin</span>(ans,r-l+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(ans==INF)&#123;<span class="comment">//判断整个串是否满足题意 </span></span><br><span class="line"><span class="built_in">puts</span>(<span class="string">&quot;0&quot;</span>);</span><br><span class="line"><span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">writeh</span>(ans);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CF56B题解</title>
+      <link href="/2022/11/28/%E9%A2%98%E8%A7%A3/CF56B-sol/"/>
+      <url>/2022/11/28/%E9%A2%98%E8%A7%A3/CF56B-sol/</url>
+      
+        <content type="html"><![CDATA[<span id="more"></span><p>做这道题的时候想到了 CSP-2022 S T3 ，于是用与之类似的 hash 做了过去。</p><h2 id="题目做法"><a href="#题目做法" class="headerlink" title="题目做法"></a>题目做法</h2><p>显然，反转后的序列一定有序，怎么用 hash 体现有序性呢？</p><p>考虑对每一个位置随机附一个权值，记作 $val_i$，则 $\sum_{i=1}^{n} i\times val_i$ 是排列有序的条件，正确性显然。</p><p>那么现在排列的权值为 $\sum_{i=1}^{n} a_i\times val_i$ ，暴力交换查看是否与目标权值相同即可。</p><p>时间复杂度为 $\Theta(n^3)$ ，但是枚举左右端点和交换时都有一半的常数，程序本身常数较小，故可以较为轻松的跑过</p><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Author:zd</span></span><br><span class="line"><span class="comment">Status:WA on pretest 2</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OK cerr&lt;&lt;<span class="meta-string">&quot;OK&quot;</span>&lt;&lt;endl;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod=<span class="number">998244353</span>;<span class="comment">//1e9+7;</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(T&amp; x)</span></span>&#123;</span><br><span class="line">x=<span class="number">0</span>;T f=<span class="number">1</span>;<span class="keyword">char</span> ch=<span class="built_in">getchar</span>();<span class="keyword">while</span>(ch&lt;<span class="string">&#x27;0&#x27;</span>||ch&gt;<span class="string">&#x27;9&#x27;</span>) &#123;<span class="keyword">if</span>(ch==<span class="string">&#x27;-&#x27;</span>)f=<span class="number">-1</span>;ch=<span class="built_in">getchar</span>();&#125;</span><br><span class="line"><span class="keyword">while</span>(ch&gt;=<span class="string">&#x27;0&#x27;</span>&amp;&amp;ch&lt;=<span class="string">&#x27;9&#x27;</span>)x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+(ch^<span class="number">48</span>),ch=<span class="built_in">getchar</span>();x=x*f;<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> ...Arg&gt;<span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(T&amp; x,Arg&amp; ...arg)</span></span>&#123;<span class="built_in">read</span>(x);<span class="built_in">read</span>(arg...);&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;<span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(T x)</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span>(x&lt;<span class="number">0</span>)<span class="built_in">putchar</span>(<span class="string">&#x27;-&#x27;</span>),x=-x;<span class="keyword">if</span>(x&lt;<span class="number">10</span>)<span class="built_in">putchar</span>(x+<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line"><span class="keyword">else</span> <span class="built_in">write</span>(x/<span class="number">10</span>),<span class="built_in">putchar</span>(x%<span class="number">10</span>+<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T,<span class="keyword">typename</span> ...Arg&gt;<span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(T&amp; x,Arg&amp; ...arg)</span></span>&#123;<span class="built_in">write</span>(x);<span class="built_in">putchar</span>(<span class="string">&#x27; &#x27;</span>);<span class="built_in">write</span>(arg...);&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">writek</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="built_in">write</span>(x);<span class="built_in">putchar</span>(<span class="string">&#x27; &#x27;</span>);&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">writeh</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="built_in">write</span>(x);<span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">mt19937 <span class="title">e</span><span class="params">(time(<span class="literal">NULL</span>))</span></span>;</span><br><span class="line">uniform_int_distribution&lt;<span class="keyword">int</span>&gt;<span class="built_in">d</span>(<span class="number">1</span>,<span class="number">1e5</span>);</span><br><span class="line"><span class="keyword">int</span> val[N],a[N],sum,tmpp,n;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="built_in">read</span>(n);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line"><span class="built_in">read</span>(a[i]);</span><br><span class="line">val[i]=<span class="built_in">d</span>(e);</span><br><span class="line">tmpp+=val[i]*a[i];</span><br><span class="line">sum+=val[i]*i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> l=<span class="number">1</span>;l&lt;=n;l++)&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> r=l+<span class="number">1</span>;r&lt;=n;r++)&#123;</span><br><span class="line"><span class="keyword">int</span> tmp=tmpp;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> k=l;k&lt;=(l+r)/<span class="number">2</span>;k++)&#123;</span><br><span class="line">tmp+=a[r-k+l]*val[k]-a[k]*val[k];</span><br><span class="line">tmp+=a[k]*val[r-k+l]-a[r-k+l]*val[r-k+l];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(tmp==sum)&#123;</span><br><span class="line"><span class="built_in">write</span>(l,r);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">puts</span>(<span class="string">&quot;0 0&quot;</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组开大了没有 ？开不开 long long ？多测清空了吗 ？</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>P8845 [传智杯</title>
+      <link href="/2022/11/28/%E9%A2%98%E8%A7%A3/p8845-tijie/"/>
+      <url>/2022/11/28/%E9%A2%98%E8%A7%A3/p8845-tijie/</url>
+      
+        <content type="html"><![CDATA[ <span id="more"></span><h2 id="题意简述"><a href="#题意简述" class="headerlink" title="题意简述"></a>题意简述</h2><p>询问第 $x$ 个质数异或上第 $y$ 个质数是否为 $1$。</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><strong>下面我们约定 $x&lt;y$</strong>。</p><p>显然两数异或起来为 $1$，则<strong>两数奇偶性不同</strong>，而所有质数中只有第一个质数 $2$，为偶数，所以首先 $x$ 为 $1$ 。</p><p>然后我们发现除了 $2,3$ ，其他的质数都大于 $4$，也就是会对二进制下第二位以上产生贡献，显然不再为 $1$。</p><p>于是得出结论：只有 $x=1,y=2$ 时才满足条件，其他情况下都不满足。</p><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Author:zd</span></span><br><span class="line"><span class="comment">Status:WA on pretest 2</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">int</span> _;</span><br><span class="line">cin&gt;&gt;_;</span><br><span class="line"><span class="keyword">while</span>(_--)&#123;</span><br><span class="line"><span class="keyword">int</span> x,y;</span><br><span class="line">cin&gt;&gt;x&gt;&gt;y;</span><br><span class="line"><span class="keyword">if</span>(x&gt;y)<span class="built_in">swap</span>(x,y);</span><br><span class="line"><span class="keyword">if</span>(x==<span class="number">1</span>&amp;&amp;y==<span class="number">2</span>)&#123;</span><br><span class="line"><span class="built_in">puts</span>(<span class="string">&quot;Yes&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">&quot;No&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组开大了没有 ？开不开 long long ？多测清空了吗 ？</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CF1729E 题解</title>
       <link href="/2022/09/18/%E9%A2%98%E8%A7%A3/CF1729E-sol/"/>
       <url>/2022/09/18/%E9%A2%98%E8%A7%A3/CF1729E-sol/</url>
@@ -42,63 +99,6 @@
     
     
     <entry>
-      <title>闲话</title>
-      <link href="/2022/09/18/%E9%9A%8F%E6%84%9F/xianhua/"/>
-      <url>/2022/09/18/%E9%9A%8F%E6%84%9F/xianhua/</url>
-      
-        <content type="html"><![CDATA[<h3 id="2022-9-18"><a href="#2022-9-18" class="headerlink" title="2022.9.18"></a>2022.9.18</h3><p>至少，我还有一份热爱，和拼一次的机会。</p><p>无论结局如何，我还是那个没有长大的可以发自内心笑的小孩子。</p><p>CSP-S 2022 RP++</p><h3 id="2022-10-28"><a href="#2022-10-28" class="headerlink" title="2022.10.28"></a>2022.10.28</h3><p>没有任何动力，再次感觉宇宙正离我远去。</p><p>似乎变得越来越不合群，越来越不令人满意，使人恶心。</p><p>这么下去真的会好吗，应该肯定不会，那我到底在干什么呢？我到底想要什么呢？</p><p>如果这个问题我都不知道，或者这个问题我就是不知道。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 随感 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>My Day</title>
-      <link href="/2022/08/20/%E9%9A%8F%E6%84%9F/English/"/>
-      <url>/2022/08/20/%E9%9A%8F%E6%84%9F/English/</url>
-      
-        <content type="html"><![CDATA[<p>When I am about to return to school, I would like to share my ordinary day in this summer vacation.</p><p>In the morning, I was called up by my homework, and then there was endless homework time.</p><p>In the afternoon, I called my good friend Venti to take a walk outside. We exchanged our happy things and shared our beautiful life. This was also the happiest time of my day.</p><p>In the evening, after dinner, took a rest until 22:35. At this time, I started learning English and information (OI). In other words, I will participate in an  algorithm competition called <a href="codeforces.com">codeforces</a> in English in the evening, which is the largest algorithm competition website in the world. I have exercised English and algorithm here.</p><p>This was my day. That’s right. My day didn’t end until 1:35 when the competition ended.</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 随感 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>CF下分寄</title>
-      <link href="/2022/07/16/%E7%AC%94%E8%AE%B0/cf-down-rating/"/>
-      <url>/2022/07/16/%E7%AC%94%E8%AE%B0/cf-down-rating/</url>
-      
-        <content type="html"><![CDATA[ <span id="more"></span><h2 id="CF807"><a href="#CF807" class="headerlink" title="CF807"></a>CF807</h2><p>还好还能把 A 秒了，但是交错题目就很尴尬。</p><p>B 应该早点想到前缀和， trick 很常见，但是每次应该把所有自己乱搞的样例都跑一遍，白交了一发。</p><p>C 不知道为什么挂了，思路应该没问题。</p><p><del>md 今天大概率掉分喽。</del></p><p>rating: 1066-1067 （+1）</p><h2 id="CF810"><a href="#CF810" class="headerlink" title="CF810"></a>CF810</h2><p>只会 A，还白交了 2 发，掉大分。</p><p>rating: 1067-987 （-80）</p><h2 id="codeTON-R2"><a href="#codeTON-R2" class="headerlink" title="codeTON R2"></a>codeTON R2</h2><p>不会 A，跑路了，警钟敲烂。</p><h2 id="CF811"><a href="#CF811" class="headerlink" title="CF811"></a>CF811</h2><p>A交了 2 发，不知道为什么。</p><p>C居然过了。</p><p>E到了最后脑子糊了，明明很简单可以出的。</p><p><strong>B更是重量级，本来想先打暴力，然后过了，然后忘了，然后就没有然后了</strong></p><p><del>人生中第一次 fst 寄</del></p><p>987-957 （-30 <del>本来是 +30 的 ，寄</del>）</p><h2 id="EC133"><a href="#EC133" class="headerlink" title="EC133"></a>EC133</h2><p><strong>speedforces</strong> 确信。</p><p>C 居然有 2000 分，直接大断层。</p><p>所以 AB 上打分</p><p>957-1164（+207）</p><h2 id="CF814"><a href="#CF814" class="headerlink" title="CF814"></a>CF814</h2><p><strong>人生中第一次赛时出C</strong></p><p>这样就绿了，而且离青很近了。</p><p>1164-1348（+184）</p><h2 id="CF815"><a href="#CF815" class="headerlink" title="CF815"></a>CF815</h2><p><strong>FST ON A </strong></p><p>我是大sb</p><p>1348-1328（-20）</p><h2 id="CF816"><a href="#CF816" class="headerlink" title="CF816"></a>CF816</h2><p>这次的 C 比较难，好友榜就我出了。</p><p>好像也是赛时第一次做出计数题。</p><p><strong>计数题滚出OI /oh</strong></p><h2 id="CF我也不知道了"><a href="#CF我也不知道了" class="headerlink" title="CF我也不知道了"></a>CF我也不知道了</h2><p>没出C，掉大分。</p><p>但至少我有复健的希望。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>整除分块学习笔记</title>
       <link href="/2022/07/15/%E7%AC%94%E8%AE%B0/zhengchu-fenkuai/"/>
       <url>/2022/07/15/%E7%AC%94%E8%AE%B0/zhengchu-fenkuai/</url>
@@ -110,25 +110,6 @@
         <tags>
             
             <tag> 笔记 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>桌游制作</title>
-      <link href="/2022/05/14/%E6%9C%AA%E5%AE%8C%E5%B7%A5/zhuoyou/"/>
-      <url>/2022/05/14/%E6%9C%AA%E5%AE%8C%E5%B7%A5/zhuoyou/</url>
-      
-        <content type="html"><![CDATA[<h4 id="暑假重构，稍等。"><a href="#暑假重构，稍等。" class="headerlink" title="暑假重构，稍等。"></a>暑假重构，稍等。</h4> <span id="more"></span><h3 id="0x00基本概念及规则："><a href="#0x00基本概念及规则：" class="headerlink" title="0x00基本概念及规则："></a>0x00基本概念及规则：</h3><p>五大学科，每个学科共100分，满分500分，是游戏里的<strong>货币系统</strong>；</p><p>货币通过基本的<strong>课堂</strong>来获取，面值分别为 1/3/5/10/20/50。</p><p>课堂的获取同大富翁的房屋，有多种类型，每次升级增加1级货币（<strong>不可多次获取</strong>）</p><p>这个桌游最重要的是事件系统，将会一点一点更新。</p><p><strong>结束条件：当有5次模拟考试后，事件卡中抽到《期末考试》，盘点所有人的分数，最高分获胜。</strong></p><h3 id="0x01英雄"><a href="#0x01英雄" class="headerlink" title="0x01英雄"></a>0x01英雄</h3><p>ocean-song：疫情立刻获得一次双倍点数（硫八助阵），双倍点数（快快地），一次能投掷2次色子，但到达化学学校停止一回合（早上晚退）（双倍点数可以叠加）</p><p>平平：数学结算时分数-5（步骤分），每次数学成绩倍率*2，不会被自闭（人生相谈）</p><p>zy：看电影，黄起来，更有动力，点数每次*3</p><p><del>zx</del>：第一次到达无人认领的学校所有人停止一回合（开班会），</p><p>log：到达物理学校使其他人停留一回合（讲课昏昏欲睡），一旦物理成绩更新自己立刻考物理，不计入模拟考试中（考试体验负无穷）</p><p><del>tx</del>：停止行动时掷色子，若大于4则英语加1分；若小于4则后退3步（今天大无语）；若等于4则停止移动一回合（乱搞）</p><p>mfy：每次停止行动时留下一个mfy印，若有人捡到（包括自己）停止一个回合；十分爱暴力，每次行走的步数+1</p><p><del>徐洁</del>：一旦到达学校可选择所有人停止行动2回合（讲完这最后一屏），每次抽机遇卡所有人都抽（孩孩们请反思）</p><p><del>卓博世</del>：实在，不会被任何人的技能影响（英雄），当别人和他距离在3格以内（&lt;=3）时交换位置（袜子臭）</p><h3 id="0x01-事件"><a href="#0x01-事件" class="headerlink" title="0x01 事件"></a>0x01 事件</h3><p>定义基本事件如下：</p><ul><li>灾难卡（be）：特指所有坏事件；</li><li>福约卡（he）：特指所有好事件；</li><li>机遇卡（ly）：最差不会到达be，最好会到达ly；</li><li>危机卡 （ul）：会好不会到达he，最差达到be;</li><li>考试卡 （ex）：如题目；</li></ul><p>1.0.0：</p><ul><li>ly：<ol><li>放假：所有人所有科目失去1分，如果没有，则不失去；</li><li>寒暑假：所有人所有科目失去5分，辅导班额外获得1分；</li><li>看小说（糖/刀）：自己糖则接着进行一回合，刀则停止一回合不动；</li><li>原神启动！：自己停止一回合行动，除了英语每科加1分；</li><li>偏科：自己最高科目分数*2，最低分数归0；</li><li>文能提笔安天下：自己语文英语各得5分；</li><li>理能——-：自己数理化各得3分；</li></ol></li><li>be：<ol><li>疫情：所有人失去所有学校的成绩；</li><li>内卷：最近考试最高分各科加1分，最低的各科扣1分；</li><li>摆烂：停止3回合行动，每科扣一分；</li></ol></li></ul><h3 id="0x03-boss"><a href="#0x03-boss" class="headerlink" title="0x03 boss"></a>0x03 boss</h3><h3 id="0x04-地图"><a href="#0x04-地图" class="headerlink" title="0x04 地图"></a>0x04 地图</h3>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 未完工 </tag>
             
         </tags>
       
@@ -167,25 +148,6 @@
         <tags>
             
             <tag> 题解 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>我的资源</title>
-      <link href="/2022/02/24/%E8%B5%84%E6%BA%90/%E8%B5%84%E6%BA%90/"/>
-      <url>/2022/02/24/%E8%B5%84%E6%BA%90/%E8%B5%84%E6%BA%90/</url>
-      
-        <content type="html"><![CDATA[<h1 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h1><p>nope.</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 资源 </tag>
             
         </tags>
       
@@ -262,25 +224,6 @@
         <tags>
             
             <tag> 题解 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>寒假计划</title>
-      <link href="/2022/01/23/%E7%AC%94%E8%AE%B0/plan%20to%20the%20winter/"/>
-      <url>/2022/01/23/%E7%AC%94%E8%AE%B0/plan%20to%20the%20winter/</url>
-      
-        <content type="html"><![CDATA[<h2 id="1-总体计划"><a href="#1-总体计划" class="headerlink" title="1.总体计划"></a>1.总体计划</h2><ol><li>基本上一天一个题（具体怎样还是要看计划）</li><li>差不多在基本上学到的内容下拓展一下 STL 内容吧，<strong>尤其是迭代器</strong>。</li><li><p>洛谷上三节数学课得听懂它，<del>不然就亏了呢</del>。</p><span id="more"></span></li></ol><h2 id="2-具体计划"><a href="#2-具体计划" class="headerlink" title="2. 具体计划"></a>2. 具体计划</h2><ol><li>1.23 ~ 1.29 不一定能做成题，但合起来 3~5 道题吧。（<del>这学大伟业，多是一件霉事啊</del>）</li><li>1.30 ~ 2.5 过年？<del>反正不用写作业，待在家里也没事</del>，大概做10~20道题吧</li><li>2.5 ~ 2.15 准备开学，保证一天一道</li></ol><p>看看寒假洛谷刷 250 道？不好说还。（upd: 已经A250了，争取 A300 ）</p><h2 id="3-关于其他"><a href="#3-关于其他" class="headerlink" title="3.关于其他"></a>3.关于其他</h2><ol><li>一些数学知识突然有了灵感一定要记下来，反正现在又有了地方放了，一定得放上</li><li>保持热爱，不要变懒！（<del>对就是你，把$LATEX$修了</del>）【在洛谷和我的 $Blog$ 上这一条不一样】</li><li>B 站？鬼才刷（<del>无意冒犯</del>），把 B 站 $ban$ 了去就好了。</li><li><del>治我的拖延症</del></li></ol><h2 id="4-不会的怎么办？"><a href="#4-不会的怎么办？" class="headerlink" title="4.不会的怎么办？"></a>4.不会的怎么办？</h2><p><del>背。</del></p><p>先理解，然后不断打板子，<del>然后你就会了</del>。</p><p>其实一直去想，然后总有一天就会了。</p><p>OI 不比 whk 难嘛~<br><del>总比背政治简单。</del></p><h2 id="要坚信，再好也有比我好的，再差也有比我差的。"><a href="#要坚信，再好也有比我好的，再差也有比我差的。" class="headerlink" title="要坚信，再好也有比我好的，再差也有比我差的。"></a>要坚信，再好也有比我好的，再差也有比我差的。</h2><p>大概就这样吧，行。</p><p><del>删除号最多的一篇。</del></p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">    determination++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 随感 </tag>
             
         </tags>
       
@@ -423,8 +366,8 @@
     
     <entry>
       <title>hello</title>
-      <link href="/2022/01/21/text/hello/"/>
-      <url>/2022/01/21/text/hello/</url>
+      <link href="/2022/01/21/test/hello/"/>
+      <url>/2022/01/21/test/hello/</url>
       
         <content type="html"><![CDATA[ <span id="more"></span><p>zd,yyds!</p><p><a href="/download/text.rar">text</a></p><p>$\LaTeX$</p>]]></content>
       
@@ -432,7 +375,7 @@
       
         <tags>
             
-            <tag> text </tag>
+            <tag> test </tag>
             
         </tags>
       
