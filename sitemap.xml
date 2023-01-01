@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://hereiszd.github.io/2022/12/30/%E9%9A%8F%E6%84%9F/2022-2023/</loc>
+    
+    <lastmod>2022-12-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://hereiszd.github.io/2022/12/05/%E9%9A%8F%E6%84%9F/dui-shi-ju-de-yi-dian-kan-fa/</loc>
     
     <lastmod>2022-12-05</lastmod>
@@ -220,7 +229,7 @@
 
   <url>
     <loc>https://hereiszd.github.io/</loc>
-    <lastmod>2022-12-29</lastmod>
+    <lastmod>2023-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -228,28 +237,28 @@
   
   <url>
     <loc>https://hereiszd.github.io/tags/test/</loc>
-    <lastmod>2022-12-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://hereiszd.github.io/tags/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2022-12-29</lastmod>
+    <lastmod>2023-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hereiszd.github.io/tags/%E9%9A%8F%E6%84%9F/</loc>
-    <lastmod>2022-12-29</lastmod>
+    <lastmod>2023-01-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://hereiszd.github.io/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2023-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://hereiszd.github.io/tags/%E9%A2%98%E8%A7%A3/</loc>
-    <lastmod>2022-12-29</lastmod>
+    <lastmod>2023-01-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
