@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"hereiszd.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":-1,"unescape":true,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="植树节(planting)一.一句话题意区间加一，求序列最大值。 二.题目分析一.线段树模板略。 二.差分定义：设原数组 $a_n$，设数组 $b_n&#x3D;a_n-a_{n-1}$ 为 $a$ 的差分数组。其中一个性质是 $b$ 的前缀和数组就是 $a$。 我们很容易知道对 $a$ 任意区间 $[l,r]$ 区间加 $x$ 就等价于 $b_l + x$ 同时 $b_{r+1} -x$证明略，请感性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSP-J 2022补赛题解">
+<meta property="og:url" content="https://hereiszd.github.io/2023/06/21/%E9%A2%98%E8%A7%A3/ex-CSP-J-2022-sol/index.html">
+<meta property="og:site_name" content="zd的小窝">
+<meta property="og:description" content="植树节(planting)一.一句话题意区间加一，求序列最大值。 二.题目分析一.线段树模板略。 二.差分定义：设原数组 $a_n$，设数组 $b_n&#x3D;a_n-a_{n-1}$ 为 $a$ 的差分数组。其中一个性质是 $b$ 的前缀和数组就是 $a$。 我们很容易知道对 $a$ 任意区间 $[l,r]$ 区间加 $x$ 就等价于 $b_l + x$ 同时 $b_{r+1} -x$证明略，请感性">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/o1sp7juk.png">
+<meta property="og:image" content="https://cdn.luogu.com.cn/upload/image_hosting/f8zxmt3s.png">
+<meta property="article:published_time" content="2023-06-21T05:13:04.000Z">
+<meta property="article:modified_time" content="2023-06-21T05:23:28.464Z">
+<meta property="article:author" content="zd">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.luogu.com.cn/upload/image_hosting/o1sp7juk.png">
+
+<link rel="canonical" href="https://hereiszd.github.io/2023/06/21/%E9%A2%98%E8%A7%A3/ex-CSP-J-2022-sol/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <title>CSP-J 2022补赛题解 | zd的小窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">zd的小窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://hereiszd.github.io/2023/06/21/%E9%A2%98%E8%A7%A3/ex-CSP-J-2022-sol/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+      <meta itemprop="name" content="zd">
+      <meta itemprop="description" content="I love Barbatos forever!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zd的小窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSP-J 2022补赛题解
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-06-21 13:13:04 / 修改时间：13:23:28" itemprop="dateCreated datePublished" datetime="2023-06-21T13:13:04+08:00">2023-06-21</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+         <span id="more"></span>
+<h1 id="植树节-planting"><a href="#植树节-planting" class="headerlink" title="植树节(planting)"></a>植树节(planting)</h1><h2 id="一-一句话题意"><a href="#一-一句话题意" class="headerlink" title="一.一句话题意"></a>一.一句话题意</h2><p>区间加一，求序列最大值。</p>
+<h2 id="二-题目分析"><a href="#二-题目分析" class="headerlink" title="二.题目分析"></a>二.题目分析</h2><h3 id="一-线段树模板"><a href="#一-线段树模板" class="headerlink" title="一.线段树模板"></a>一.线段树模板</h3><p>略。</p>
+<h3 id="二-差分"><a href="#二-差分" class="headerlink" title="二.差分"></a>二.差分</h3><p>定义：设原数组 $a_n$，设数组 $b_n=a_n-a_{n-1}$ 为 $a$ 的差分数组。其中一个性质是 $b$ 的前缀和数组就是 $a$。</p>
+<p>我们很容易知道对 $a$ 任意区间 $[l,r]$ 区间加 $x$ 就等价于 $b_l + x$ 同时 $b_{r+1} -x$<br>证明略，请感性理解</p>
+<h2 id="三-代码"><a href="#三-代码" class="headerlink" title="三.代码"></a>三.代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> l,r;</span><br><span class="line">		cin&gt;&gt;l&gt;&gt;r;</span><br><span class="line">		l++;r++;</span><br><span class="line">		a[l]++;a[r+<span class="number">1</span>]--;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">1e6</span>+<span class="number">4</span>;i++)&#123;</span><br><span class="line">		a[i]+=a[i<span class="number">-1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> maxn=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">1e6</span>+<span class="number">4</span>;i++)&#123;</span><br><span class="line">		maxn=<span class="built_in">max</span>(maxn,a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;maxn&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="宴会-banquet"><a href="#宴会-banquet" class="headerlink" title="宴会(banquet)"></a>宴会(banquet)</h1><h2 id="一-一句话题意-1"><a href="#一-一句话题意-1" class="headerlink" title="一.一句话题意"></a>一.一句话题意</h2><p>给定一个长为 $n$ 的序列 $a_n$ 和 $b_n$，求一个 $x_0$ 使得最小化 $\max_{i=1}^n{b_i+|x_i-x_0|}$。</p>
+<h2 id="二-题目分析-1"><a href="#二-题目分析-1" class="headerlink" title="二.题目分析"></a>二.题目分析</h2><p>按照我们小学数学的知识，我们怎么处理绝对值问题呢？</p>
+<p>其中一种解法就是几何意义：</p>
+<p>我们先对这个式子进行等价变形，那么就有：</p>
+<script type="math/tex; mode=display">
+d=\left
+\{\begin{aligned}
+|x_i-t_i-x_0| (x_i<x_0)
+\\
+|x_i+t_i-x_0| (x_i \ge x_0)
+\end{aligned}\right.</script><p>有点抽象？没关系来张图：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/o1sp7juk.png" alt=""></p>
+<p>也就是说如果 $x_i&lt;x_0$ 的时候，我们的 $d$ 就是右边红色的部分，否则就是左边红色的部分。</p>
+<p>那么我们现在要让最大的 $d$ <strong> 最小 </strong> ，首先我们还是要找出这个 $d_{min}$。</p>
+<p>那我们不妨找出值域，来看这样一张图：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/f8zxmt3s.png" alt=""></p>
+<p>那么显然值域就是 $[x_{min}-t_{min},x_{max}+t_{max}]$。</p>
+<p>那么显然当 $x_0$ 取值域终点的时候 $d=d_{min}$，即当 $\frac{x_{max}+t_{max}+x_{min}-t_{min}}{2}$ 即可。</p>
+<h2 id="代码时间"><a href="#代码时间" class="headerlink" title="代码时间"></a>代码时间</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">read</span>(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">read</span>(a[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">read</span>(t[i]);</span><br><span class="line">	<span class="keyword">int</span> minn=INF,maxn=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		minn=<span class="built_in">min</span>(a[i]-t[i],minn);minn=<span class="built_in">min</span>(a[i]+t[i],minn);</span><br><span class="line">		maxn=<span class="built_in">max</span>(a[i]-t[i],maxn);maxn=<span class="built_in">max</span>(a[i]+t[i],maxn);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%.1lf\n&quot;</span>,(minn+maxn)*<span class="number">1.0</span>/<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="部署-deploy"><a href="#部署-deploy" class="headerlink" title="部署(deploy)"></a>部署(deploy)</h1><p>基础树论板子题。</p>
+<h2 id="一-题意简述"><a href="#一-题意简述" class="headerlink" title="一.题意简述"></a>一.题意简述</h2><p>给定一棵树，两种操作：</p>
+<pre><code>1. 子树加
+2. 父亲和儿子加
+</code></pre><p>先进行操作，最后若干次单点询问。</p>
+<h2 id="二-题目分析-2"><a href="#二-题目分析-2" class="headerlink" title="二.题目分析"></a>二.题目分析</h2><p>当我刚看到这道题的时候，我说：“这不是树剖板子？”接着我再看了一看发现不是，而且比树剖简单了不知道多少倍，<del>毕竟是普及组的题目</del>。</p>
+<p>我们发现我们是修改完再查询，题目都把离线拍到了脸上。</p>
+<p>考虑预处理操作最后再改，即最后只遍历一遍就可以知道所有点的权值。</p>
+<p>首先是子树加，我们直接定义一个数组 $Sz_i$ 代表以 $i$ 为根的子树上加了多少，然后预处理就直接加就可以。</p>
+<p>再接着是父亲和孩子的和，原题目给的是<em>直接相连的点</em>，但是这是一棵树，我们就要想一想树的特殊性质：<strong>树只有一个父亲、若干个儿子</strong>。</p>
+<p>那只有一个父亲我们直接把父亲加上就好。</p>
+<p>孩子呢？我们还知道树是一种递归结构，在这个题中就是指<strong>这些孩子都以这个节点为父亲</strong>。</p>
+<p>那我们直接记录父亲加了多少，最后一遍 DFS 就可以知道每个点最后权值是多少了。</p>
+<h2 id="三-代码时间"><a href="#三-代码时间" class="headerlink" title="三.代码时间"></a>三.代码时间</h2><ul>
+<li>注意双向边别忘了开 $2$ 倍数组。</li>
+<li>题目中指定了 $1$ 号节点为根节点。</li>
+<li>代码只给出了核心部分。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	Author:zd</span></span><br><span class="line"><span class="comment">	Status:WA on pretest 2</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> f)</span></span>&#123;</span><br><span class="line">	fa[x]=f;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=head[x];i;i=e[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">int</span> y=e[i].to;</span><br><span class="line">		<span class="keyword">if</span>(y==f)<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">dfs1</span>(y,x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> tmp1,<span class="keyword">int</span> tmp2)</span></span>&#123;</span><br><span class="line">	a[x]+=(tmp1+tmp2);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=head[x];i;i=e[i].nxt)&#123;</span><br><span class="line">		<span class="keyword">int</span> y=e[i].to;</span><br><span class="line">		<span class="keyword">if</span>(y==fa[x])<span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">dfs2</span>(y,tmp1+sz[y],laz[x]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">read</span>(n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">read</span>(a[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> x,y;</span><br><span class="line">		<span class="built_in">read</span>(x,y);</span><br><span class="line">		<span class="built_in">ade</span>(x,y);</span><br><span class="line">		<span class="built_in">ade</span>(y,x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">dfs1</span>(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">read</span>(m);</span><br><span class="line">	<span class="keyword">while</span>(m--)&#123;</span><br><span class="line">		<span class="keyword">int</span> op,x,y;</span><br><span class="line">		<span class="built_in">read</span>(op,x,y);</span><br><span class="line">		<span class="keyword">if</span>(op==<span class="number">1</span>)&#123;</span><br><span class="line">			sz[x]+=y;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			a[fa[x]]+=y;</span><br><span class="line">			a[x]+=y;</span><br><span class="line">			laz[x]+=y;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">dfs2</span>(<span class="number">1</span>,sz[<span class="number">1</span>],<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">read</span>(k);</span><br><span class="line">	<span class="keyword">while</span>(k--)&#123;</span><br><span class="line">		<span class="keyword">int</span> x;</span><br><span class="line">		<span class="built_in">read</span>(x);</span><br><span class="line">		<span class="built_in">writeh</span>(a[x]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="吟诗-poetize"><a href="#吟诗-poetize" class="headerlink" title="吟诗(poetize)"></a>吟诗(poetize)</h1><p><del>史上最难普及组题目</del></p>
+<h2 id="一-一句话简述不完题意"><a href="#一-一句话简述不完题意" class="headerlink" title="一.一句话简述不完题意"></a>一.一句话简述不完题意</h2><p>给定常数 $X,Y,Z$，求长度为 $n$ 的数列 $a(1\le a_i \le 10,1\le i \le n)$的个数， 使得存在 $1 \le x \le y \le z \le r $，使得：</p>
+<script type="math/tex; mode=display">\sum\limits_{i=x}^{y}=X,\sum\limits_{i=y+1}^{z}=Y,\sum\limits_{i=z+1}^{r}=Z</script><p><del>是的我在尽量不抽象了。</del></p>
+<h2 id="二-题目分析-3"><a href="#二-题目分析-3" class="headerlink" title="二.题目分析"></a>二.题目分析</h2><p>先想暴力。</p>
+<p>显然有一个枚举全排列的暴力分，太过 $\color{red}\text{Native}$ 这里不说了。</p>
+<p>$40$ 分呢？</p>
+<p>我们想到去推柿子，但是问题是我们稍微写一写就发现我们直接这么做会出现重复计数的问题，并且这个问题还十分地棘手，怎么办呢？</p>
+<p>我们发现总数量就是 $10^n$。<strong>正难则反，考虑解决不合法的数目，容斥原理即可</strong>。</p>
+<p>然后便没有思路了，数学这条路算是堵死了。</p>
+<p>再看一眼数据范围：$X+Y+Z \le 17 ,n \le 40$ 考虑状压 DP。</p>
+<p>因为 $n$ 太大了我们考虑状压 $X+Y+Z$，现在的问题是设计一种状压方案储存一个不超过 $17$ 的数，同时还能快速判断条件是否合法。</p>
+<p>我们考虑到把一个数 $m$ 拆成若干个有序正整数的方案数为 $2^{m-1}$ （想一想，为什么？），我们可以看成 $m$ 个 $1$ 相加，每一位中间可以选择分割或者不分割。受此启发，我们设计这样一种状态：第 $i$ 位若为 $1$ 说明在第 $i$  位和第 $i+1$ 位之间选择分割，<strong>也就是说存在一个前缀和为 $i$ </strong>。</p>
+<p>然后我们再把它反转过来，变成后缀和，原因是我们 DP 是从前往后递推的，这样可以方便判断，具体来说，我们把 $17$ 分成 $5,7,5$，对应的压缩是 <code>10000100000010000</code> ，从后往前数第 $5,12,17$ 位为 $1$，即存在 $5,12,17$ 的 <strong>后缀和</strong>。</p>
+<p>怎么判断题意呢？只需要同时存在 $Z,Y+Z,X+Y+Z$ 的后缀和即可。</p>
+<p>推一下柿子，当状态为 $i$时加入一个新数 $t$ 时，新的状态为 <code>(i&lt;&lt;t)+(1&lt;&lt;(t-1))</code>。</p>
+<p>然后按照题意 DP 即可。</p>
+<h2 id="三-代码时间-1"><a href="#三-代码时间-1" class="headerlink" title="三.代码时间"></a>三.代码时间</h2><ul>
+<li>注意位运算的优先级很低，一定要勤加括号。</li>
+<li>一般这种题需要注意运算中爆  <code>int</code> ，本人习惯一般 <code>#define int long long</code>。</li>
+<li>取模一定要勤快，不然你都不知道你这个数为啥这么奇怪。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n,m,k;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">45</span>][N],X,Y,Z;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">gb</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (x&gt;&gt;(i<span class="number">-1</span>))&amp;<span class="number">1</span>;</span><br><span class="line">&#125;<span class="comment">//取第 i 位 </span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="built_in">gb</span>(Z,num)) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="built_in">gb</span>(Y+Z,num)) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="built_in">gb</span>(X+Y+Z,num)) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="comment">//后缀和判断是否不合法 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">read</span>(n,X,Y,Z);</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;<span class="comment">//长度 </span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;(<span class="number">1</span>&lt;&lt;(X+Y+Z));j++)&#123;<span class="comment">//枚举状态 </span></span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=<span class="number">10</span>;k++)&#123;</span><br><span class="line">				<span class="keyword">int</span> u=(j&lt;&lt;k)+(<span class="number">1</span>&lt;&lt;(k<span class="number">-1</span>));<span class="comment">//处理后缀和 </span></span><br><span class="line">                u&amp;=(<span class="number">1</span>&lt;&lt;(X+Y+Z))<span class="number">-1</span>;</span><br><span class="line">				<span class="keyword">if</span>(<span class="built_in">check</span>(u))(f[i][u]+=f[i<span class="number">-1</span>][j])%=mod;</span><br><span class="line">			&#125;<span class="comment">//暴力填数 </span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> ans=<span class="built_in">qp</span>(<span class="number">10</span>,n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;(X+Y+Z));i++)(ans+=mod-f[n][i])%mod;</span><br><span class="line">	<span class="built_in">writeh</span>(ans%mod);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    <div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag"># 题解</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/21/%E9%A2%98%E8%A7%A3/CF1801-sol/" rel="prev" title="CF1801题解">
+      <i class="fa fa-chevron-left"></i> CF1801题解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/21/%E9%A2%98%E8%A7%A3/THUPC-2023/" rel="next" title="THUPC-2023 众数 题解">
+      THUPC-2023 众数 题解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NTMwNC8zMTc3MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
+       src="//music.163.com/outchain/player?type=2&id=1868711061&auto=0&height=66">
+    </iframe>
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A4%8D%E6%A0%91%E8%8A%82-planting"><span class="nav-number">1.</span> <span class="nav-text">植树节(planting)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E4%B8%80%E5%8F%A5%E8%AF%9D%E9%A2%98%E6%84%8F"><span class="nav-number">1.1.</span> <span class="nav-text">一.一句话题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">二.题目分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80-%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.2.1.</span> <span class="nav-text">一.线段树模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C-%E5%B7%AE%E5%88%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">二.差分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">三.代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%B4%E4%BC%9A-banquet"><span class="nav-number">2.</span> <span class="nav-text">宴会(banquet)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E4%B8%80%E5%8F%A5%E8%AF%9D%E9%A2%98%E6%84%8F-1"><span class="nav-number">2.1.</span> <span class="nav-text">一.一句话题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90-1"><span class="nav-number">2.2.</span> <span class="nav-text">二.题目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%97%B6%E9%97%B4"><span class="nav-number">2.3.</span> <span class="nav-text">代码时间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2-deploy"><span class="nav-number">3.</span> <span class="nav-text">部署(deploy)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E9%A2%98%E6%84%8F%E7%AE%80%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">一.题意简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90-2"><span class="nav-number">3.2.</span> <span class="nav-text">二.题目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-%E4%BB%A3%E7%A0%81%E6%97%B6%E9%97%B4"><span class="nav-number">3.3.</span> <span class="nav-text">三.代码时间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%9F%E8%AF%97-poetize"><span class="nav-number">4.</span> <span class="nav-text">吟诗(poetize)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80-%E4%B8%80%E5%8F%A5%E8%AF%9D%E7%AE%80%E8%BF%B0%E4%B8%8D%E5%AE%8C%E9%A2%98%E6%84%8F"><span class="nav-number">4.1.</span> <span class="nav-text">一.一句话简述不完题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C-%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90-3"><span class="nav-number">4.2.</span> <span class="nav-text">二.题目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89-%E4%BB%A3%E7%A0%81%E6%97%B6%E9%97%B4-1"><span class="nav-number">4.3.</span> <span class="nav-text">三.代码时间</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="zd"
+      src="/images/touxiang.jpg">
+  <p class="site-author-name" itemprop="name">zd</p>
+  <div class="site-description" itemprop="description">I love Barbatos forever!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-06-07 | | 2022-1 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zd</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共16.4k字</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Wechat,QQZone,Weibo,Douban,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
