@@ -4,9 +4,9 @@
   
     
     <entry>
-      <title>一道好题分享</title>
-      <link href="/2025/10/20/Stolz%E5%AE%9A%E7%90%86%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/"/>
-      <url>/2025/10/20/Stolz%E5%AE%9A%E7%90%86%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/</url>
+      <title>Stolz定理及相关内容</title>
+      <link href="/2025/10/20/Mathematical%20Analysis/Stolz%E5%AE%9A%E7%90%86%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/"/>
+      <url>/2025/10/20/Mathematical%20Analysis/Stolz%E5%AE%9A%E7%90%86%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9/</url>
       
         <content type="html"><![CDATA[<p>导入：</p><p>$\displaystyle 1. 已知 \lim_{n \to \infty }a_n \sum_{i&#x3D;1}^na_i^2&#x3D;1, 求证 \lim_{n \to \infty }\sqrt[3]{3n}a_n &#x3D;1 .$</p><span id="more"></span><p>$\displaystyle \text{解: 设 } S_n&#x3D; \sum_{i&#x3D;1}^na_i^2$</p><p>$\displaystyle \text{则题设即为 } \lim_{n \to \infty }a_n S_n&#x3D;1$</p><p>$\displaystyle \text{要想证 } \lim_{n \to \infty} \sqrt{3n}a_n&#x3D;1$</p><p>$\displaystyle \text{只需证 } \lim_{n \to \infty} \frac{1}{\sqrt[3]{3n}a_n}&#x3D;1$</p><p>$\displaystyle \Longleftarrow \lim_{n \to \infty} \frac{1}{3na_n^3}&#x3D;1$</p><p>$\displaystyle \text{而 } \lim_{n \to \infty} (a_nS_n)^3&#x3D;1, \text{ 则只需证 } \lim_{n \to \infty} \frac{S_n^3}{3n}&#x3D;1$</p><p>$\displaystyle \text{而 } \lim_{n \to \infty}S_n&#x3D;\lim_{n \to \infty}n&#x3D;\infty, \text{那么只需证 } \lim_{n \to \infty} (S_n^3-S_{n-1}^3)&#x3D;3$</p><p>$\displaystyle \Longleftarrow \lim_{n \to \infty}a_n^2(S_n^2+S_nS_{n-1}+S_{n-1}^2)&#x3D;3$</p><p>$\displaystyle \Longleftarrow \lim_{n \to \infty}a_n^2S_n^2+\lim_{n \to \infty}a_n^2S_nS_{n-1}+\lim_{n \to \infty}a_n^2S_{n-1}^2&#x3D;3$</p><p>$\displaystyle \text{由题设这是显然的，因此证毕.}$</p><p>感觉这道题主要是不会 $\operatorname{Stolz} $ 定理所以做不出来，<del>但是似乎会了也做不出来。</del></p><p>必要性探路法还是得精进一下理解。</p><p>$\displaystyle1.1 ;(\operatorname{Stolz} 定理) 已知 {y_n} 严格单调递增,\lim_{n \to \infty}y_n&#x3D;\infty,\lim_{n \to \infty} \frac{x_n-x_{n-1}}{y_n-y_{n-1}}存在$</p><p>$\displaystyle 则\lim_{n \to \infty} \frac{x_n}{y_n}&#x3D;\lim_{n \to \infty} \frac{x_n-x_{n-1}}{y_n-y_{n-1}}.$</p>]]></content>
       
@@ -34,6 +34,25 @@
         <tags>
             
             <tag> test </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>去热爱吧，去生活吧——其一</title>
+      <link href="/2025/09/21/%E6%B8%B8%E8%AE%B0/%E5%8E%BB%E7%83%AD%E7%88%B1%E5%90%A7%EF%BC%8C%E5%8E%BB%E7%94%9F%E6%B4%BB%E5%90%A7%E2%80%94%E2%80%94%E5%85%B6%E4%B8%80/"/>
+      <url>/2025/09/21/%E6%B8%B8%E8%AE%B0/%E5%8E%BB%E7%83%AD%E7%88%B1%E5%90%A7%EF%BC%8C%E5%8E%BB%E7%94%9F%E6%B4%BB%E5%90%A7%E2%80%94%E2%80%94%E5%85%B6%E4%B8%80/</url>
+      
+        <content type="html"><![CDATA[<p>来到了江南三大明楼之一，也是从初中就想去的一个地方。</p><p>当时学《岳阳楼记》的时候，就被范仲淹既心系天下，又带点豁达乐观的心境感染，他这种心境也真真切切影响着我。后来还接触了这么多洞庭湖的古诗词，便越来越向往这个地方。</p><p>如今终于有机会真真切切登上范仲淹也未曾登上的楼，从某种角度上说也算是更甚于希文了吧，哈哈。<br>当时去的时候本来有个背《岳阳楼记》免票的活动。可惜没抢到名额，这篇文章也算是我屈指可数的还记着的必备篇目了。</p><p>在这里默写一下吧：</p><p>“嗟夫！予尝求古仁人之心，或异二者之为，何哉？不以物喜，不以己悲，居庙堂之高则忧其民，处江湖之远则忧其君。是进亦忧，退亦忧。然则何时而乐耶？其必曰“先天下之忧而忧，后天下之乐而乐”乎！噫！微斯人，吾谁与归？”</p><p>（纯手打，没复制）</p><p>后来又去一个什么小镇逛了一遭，结果什么人都没有，不过环境还挺好的，看着南湖（武汉，沈阳都也有一个南湖，看来普通的名字就是容易撞），看着即使九月仍郁郁葱葱的植株，恣意享受了一把独处的快乐。</p><p>现在返程长沙啦，真的有一种回家的感觉呢。</p><p>下一站，又该去些什么地方呢？</p><p><img src="https://img.feria.eu.org/u0fkaf.jpg" alt="P1"></p><p><img src="https://img.feria.eu.org/87jl0p.jpg" alt="P2"></p><p><img src="https://img.feria.eu.org/fcmlas.jpg" alt="P3"></p><p><img src="https://img.feria.eu.org/m08w3o.jpg" alt="P4"></p><p>P1-4 “淫雨霏霏”的洞庭湖</p><p>“仙湖边有船，微光照彼岸，我是这船上客，它陪我渡孤单。”</p><p><img src="https://img.feria.eu.org/t21jyg.jpg" alt="P5"></p><p><img src="https://img.feria.eu.org/4bkx1g.jpg" alt="P6"></p><p>P5-6 发呆时眼睛不自主地聚焦到了几片小小的叶子。</p><p>“可曾可愿可知冷暖，余晖散尽又熄灭绚烂，淙淙潺潺簌簌款款，娓娓诉说不惊波澜。”</p><p>P7-13 一些岳阳楼与南湖的景色，归档。</p><p><img src="https://img.feria.eu.org/s1ew12.jpg" alt="P7"></p><p><img src="https://img.feria.eu.org/ugk2cp.jpg" alt="P8"></p><p><img src="https://img.feria.eu.org/8jcvwz.jpg" alt="P9"></p><p><img src="https://img.feria.eu.org/fx22nl.jpg" alt="P10"></p><p><img src="https://img.feria.eu.org/lrb86i.jpg" alt="P11"></p><p><img src="https://img.feria.eu.org/ln0a86.jpg" alt="P12"></p><p><img src="https://img.feria.eu.org/3dtuvi.jpg" alt="P13"></p><p>（歌词摘自房东的猫《你是我最愚蠢的一次浪漫》）</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 游记 </tag>
             
         </tags>
       
